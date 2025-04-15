@@ -1,10 +1,13 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class gerenciadorProdutos {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        ArrayList<Produto> produtos = new ArrayList<>();
         int opcao;
+        int proximoId = 1;
 
         do {
             System.out.println("---------------------------------");
@@ -18,11 +21,11 @@ public class gerenciadorProdutos {
             System.out.print("Escolha uma opção: ");
 
             opcao = scanner.nextInt();
-            scanner.nextLine(); // limpar o buffer
+            scanner.nextLine(); //
 
             switch (opcao) {
                 case 1:
-                    System.out.println("Você escolheu: Cadastrar Produto");
+                    proximoId = cadastrarProduto(scanner, produtos, proximoId);
                     break;
                 case 2:
                     System.out.println("Você escolheu: Listar Produtos");
@@ -43,5 +46,41 @@ public class gerenciadorProdutos {
             System.out.println();
 
         } while (opcao != 5);
+
+    }
+
+    public static int cadastrarProduto(Scanner scanner, ArrayList<Produto> produtos, int idAtual) {
+        System.out.println("------------------------");
+        System.out.println(" CADASTRO DE PRODUTO ");
+        System.out.println("------------------------");
+        System.out.print("Nome do produto: ");
+        String nome = scanner.nextLine();
+
+        System.out.print("Preço do produto: ");
+        double preco = scanner.nextDouble();
+        scanner.nextLine();
+
+        Produto novo = new Produto(nome, preco);
+        produtos.add(novo);
+
+        System.out.println("Produto cadastrado com sucesso!");
+
+        return idAtual;
+    }
+
+    static class Produto {
+        int id;
+        String nome;
+        double preco;
+
+        public Produto(String nome, double preco) {
+            this.id = id;
+            this.nome = nome;
+            this.preco = preco;
+        }
+
+        public String toString() {
+            return "ID: " + id + " | Nome: " + nome + " | Preço: R$ " + preco;
         }
     }
+}
