@@ -7,7 +7,7 @@ public class gerenciadorProdutos {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Produto> produtos = new ArrayList<>();
         int opcao;
-        int proximoId = +1;
+        int proximoId = 1;
 
         do {
             System.out.println("---------------------------------");
@@ -34,7 +34,7 @@ public class gerenciadorProdutos {
                     alterarProduto(scanner, produtos);
                     break;
                 case 4:
-                    System.out.println("Você escolheu: Excluir Produto");
+                    excluirProduto(scanner, produtos);
                     break;
                 case 5:
                     System.out.println("Saindo do sistema...");
@@ -118,7 +118,26 @@ public class gerenciadorProdutos {
         }
     }
 
+    public static void excluirProduto(Scanner scanner, ArrayList<Produto> produtos) {
+        System.out.print("Digite o ID do produto que deseja excluir: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
 
+        boolean removido = false;
+
+        for (int i = 0; i < produtos.size(); i++) {
+            if (produtos.get(i).id == id) {
+                produtos.remove(i);
+                System.out.println("Produto removido com sucesso!");
+                removido = true;
+                break;
+            }
+        }
+
+        if (!removido) {
+            System.out.println("Produto com ID " + id + " não encontrado.");
+        }
+    }
 
     static class Produto {
         int id;
