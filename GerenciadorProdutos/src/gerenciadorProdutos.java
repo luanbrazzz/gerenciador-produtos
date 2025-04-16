@@ -7,7 +7,7 @@ public class gerenciadorProdutos {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Produto> produtos = new ArrayList<>();
         int opcao;
-        int proximoId = 1;
+        int proximoId = +1;
 
         do {
             System.out.println("---------------------------------");
@@ -31,7 +31,7 @@ public class gerenciadorProdutos {
                     listarProdutos(produtos);
                     break;
                 case 3:
-                    System.out.println("Você escolheu: Alterar Produto");
+                    alterarProduto(scanner, produtos);
                     break;
                 case 4:
                     System.out.println("Você escolheu: Excluir Produto");
@@ -65,7 +65,8 @@ public class gerenciadorProdutos {
 
         System.out.println("Produto cadastrado com sucesso!");
 
-        return idAtual;
+        return idAtual + 1;
+
     }
 
     // Listagem dos produtos
@@ -83,7 +84,42 @@ public class gerenciadorProdutos {
         }
     }
 
-    // Classe Produto
+    public static void alterarProduto(Scanner scanner, ArrayList<Produto> produtos) {
+        System.out.println("------------------------");
+        System.out.println(" ALTERAR PRODUTO ");
+        System.out.println("------------------------");
+
+        System.out.print("Digite o ID do produto que deseja alterar: ");
+        int idBusca = scanner.nextInt();
+        scanner.nextLine();
+
+        boolean encontrado = false;
+
+        for (Produto p : produtos) {
+            if (p.id == idBusca) {
+                System.out.print("Novo nome do produto (atual: " + p.nome + "): ");
+                String novoNome = scanner.nextLine();
+
+                System.out.print("Novo preço do produto (atual: R$ " + p.preco + "): ");
+                double novoPreco = scanner.nextDouble();
+                scanner.nextLine();
+
+                p.nome = novoNome;
+                p.preco = novoPreco;
+
+                System.out.println("Produto alterado com sucesso!");
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (!encontrado) {
+            System.out.println("Produto com ID " + idBusca + " não encontrado.");
+        }
+    }
+
+
+
     static class Produto {
         int id;
         String nome;
