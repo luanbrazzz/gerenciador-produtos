@@ -16,7 +16,6 @@ Como utilizar:
 Compile e execute o arquivo gerenciadorProdutos.java com um terminal ou dentro de uma IDE.
 
 2. Navegar pelo menu
-Ao iniciar, será exibido o seguinte menu:
 
 3. Instruções de uso:
 
